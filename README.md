@@ -10,12 +10,12 @@ For more information about AiTrack, visit [our GitHub repository](https://github
 
 | Repo | Commit Message | Timestamp | Date |
 |-----------|-----------|----------------|------|
-| ext test | fixMAIN: refine time formatting | 0.5min | 30.12.2024 |
+| ext test | fix(main): refine time formatting | 0.5min | 30.12.2024 |
 | ext test | fix(time): update huj.js to display time in hh:mm:ss format | 0.5min | 30.12.2024 |
-| ext test | fixcripts: use const and template literals for logging | 0.5min | 30.12.2024 |
+| ext test | fix: use const and template literals for logging | 0.5min | 30.12.2024 |
 | ext test | fix(components): update logging to show current date | 0.5min | 30.12.2024 |
-| ext test | fix(kys): fix typo in console log | 0.5min | 30.12.2024 |
-| ext test | fix(kys): fix typo in logs | 0.5min | 30.12.2024 |
+| ext test | fix(example): fix typo in console log | 0.5min | 30.12.2024 |
+| ext test | fix(example): fix typo in logs | 0.5min | 30.12.2024 |
 | ext test | fix(main): fix output in kys.ts | 0.5min | 30.12.2024 |
 | ext test | feat(ext): fix console log messages in kys and tracker | 0.5min | 30.12.2024 |
 | ext test | fix: Update tracker.ts with correct logging output. | 0.5min | 30.12.2024 |
@@ -29,4 +29,3 @@ For more information about AiTrack, visit [our GitHub repository](https://github
 | ext test | feat(tracker): basic tracking functionality implemented | 0.5min | 30.12.2024 |
 | ext test | an error occurred using ai, please contact the extension owner | 0.5min | 30.12.2024 |
 | ext test | commit message (will be update with ai message) | 0.5min | 30.12.2024 |
-| repoName | commit message | 0.001min | date |
