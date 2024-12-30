@@ -1,11 +1,11 @@
-Modified File: c:\Users\biuro\Desktop\ext test\new.ts
+File: c:\Users\biuro\Desktop\ext test\dsgsdgsgsdf.ts
 Diff:
-Index: c:\Users\biuro\Desktop\ext test\new.ts
+Index: c:\Users\biuro\Desktop\ext test\dsgsdgsgsdf.ts
 ===================================================================
---- c:\Users\biuro\Desktop\ext test\new.ts
-+++ c:\Users\biuro\Desktop\ext test\new.ts
+--- c:\Users\biuro\Desktop\ext test\dsgsdgsgsdf.ts
++++ c:\Users\biuro\Desktop\ext test\dsgsdgsgsdf.ts
 @@ -0,0 +1,1 @@
-+console.log("new")
++console.log("hello world")
 \ No newline at end of file
 
 
