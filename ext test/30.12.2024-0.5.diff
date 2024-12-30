@@ -7,8 +7,8 @@ Index: c:\Users\biuro\Desktop\ext test\lol.js
 @@ -1,4 +1,4 @@
  let tekst = "To jest\nprzykładowy\ntekst.";
  let bezNowychLinii = tekst.replace(/\n/g, "");
--console.log(tekst)
-+// console.log(tekst)
+-// console.log(tekst)
++console.log(tekst)
  console.log(bezNowychLinii);
 
 
