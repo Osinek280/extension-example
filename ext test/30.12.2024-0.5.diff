@@ -1,19 +1,14 @@
-File: c:\Users\biuro\Desktop\ext test\kys.ts
+File: c:\Users\biuro\Desktop\ext test\lol.js
 Diff:
-Index: c:\Users\biuro\Desktop\ext test\kys.ts
+Index: c:\Users\biuro\Desktop\ext test\lol.js
 ===================================================================
---- c:\Users\biuro\Desktop\ext test\kys.ts
-+++ c:\Users\biuro\Desktop\ext test\kys.ts
-@@ -1,9 +1,9 @@
- async function fetchData(url: string): Promise<any> {
-   try {
-     const response = await fetch(url);
-     if (!response.ok) {
--        throw new Error(`HTTP error! status: ${response.status}`);
-+        // throw new Error(`HTTP error! status: ${response.status}`);
-     }
-     const data = await response.json();
-     return data;
- }catch (error) {
+--- c:\Users\biuro\Desktop\ext test\lol.js
++++ c:\Users\biuro\Desktop\ext test\lol.js
+@@ -1,4 +1,4 @@
+ let tekst = "To jest\nprzykładowy\ntekst.";
+ let bezNowychLinii = tekst.replace(/\n/g, "");
+-console.log(tekst)
++// console.log(tekst)
+ console.log(bezNowychLinii);
 
 
