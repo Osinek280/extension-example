@@ -1,37 +1,10 @@
-File: c:\Users\biuro\Desktop\ext test\kys.ts
-Diff:
-Index: c:\Users\biuro\Desktop\ext test\kys.ts
-===================================================================
---- c:\Users\biuro\Desktop\ext test\kys.ts
-+++ c:\Users\biuro\Desktop\ext test\kys.ts
-@@ -0,0 +1,1 @@
-+console.log("huj")
-\ No newline at end of file
-
-
-File: c:\Users\biuro\Desktop\ext test\tracker.ts
-Diff:
 Index: c:\Users\biuro\Desktop\ext test\tracker.ts
 ===================================================================
 --- c:\Users\biuro\Desktop\ext test\tracker.ts
 +++ c:\Users\biuro\Desktop\ext test\tracker.ts
 @@ -1,1 +1,1 @@
--console.log("test")
+-console.log("testek")
 \ No newline at end of file
-+console.log("testek")
++console.log("teść")
 \ No newline at end of file
-
-
-File: c:\Users\biuro\Desktop\ext test\huj.js
-Diff:
-Index: c:\Users\biuro\Desktop\ext test\huj.js
-===================================================================
---- c:\Users\biuro\Desktop\ext test\huj.js
-+++ c:\Users\biuro\Desktop\ext test\huj.js
-@@ -1,1 +1,1 @@
--console.log("no el")
-\ No newline at end of file
-+console.log("bolek i lolek")
-\ No newline at end of file
-
 
