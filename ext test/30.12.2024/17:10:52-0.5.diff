@@ -1,0 +1,16 @@
+Index: c:\Users\biuro\Desktop\ext test\huj.js
+===================================================================
+--- c:\Users\biuro\Desktop\ext test\huj.js
++++ c:\Users\biuro\Desktop\ext test\huj.js
+@@ -2,9 +2,8 @@
+ 
+ // Pobieranie godzin, minut i sekund
+ const hours = now.getHours().toString().padStart(2, '0');
+ const minutes = now.getMinutes().toString().padStart(2, '0');
++const seconds = now.getSeconds().toString().padStart(2, '0');
+ 
+ // Łączenie w format HH:mm:ss
+ const formattedTime = `${hours}:${minutes}:${seconds}`;
+-
+-console.log(`${formattedTime}`);
+
