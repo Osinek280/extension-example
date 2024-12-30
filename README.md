@@ -9,7 +9,7 @@ For more information about AiTrack, visit [our GitHub repository](https://github
 ## Code Tracking Log
 
 | Repo | Commit Message | Timestamp | Date |
-|-----------|-----------|----------------|------|
+|------------------|-----------|----------------|------|
 | ext test | fix(main): refine time formatting | 0.5min | 30.12.2024 |
 | ext test | fix(time): update huj.js to display time in hh:mm:ss format | 0.5min | 30.12.2024 |
 | ext test | fix: use const and template literals for logging | 0.5min | 30.12.2024 |
