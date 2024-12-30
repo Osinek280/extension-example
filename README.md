@@ -6,6 +6,7 @@ Automated code tracking repository
 
 | Repo | Commit Message | Timestamp | Date |
 |-----------|-----------|----------------|------|
+| ext test | fix(features/ tracker): simplify file tracking mechanismThis commit simplifies the file tracking mechanism in the Tracker class by centralizing the logic for finding and tracking files. It also extends the tracked file types to include more file extensions. | 0.5min | 30.12.2024 |
 | ext test | feat(tracker): initial implementation of file tracking and committing feature | 0.5min | 30.12.2024 |
 | ext test | feat: adds hello world console log | 0.5min | 30.12.2024 |
 | ext test | feat(ext): adds basic console logging | 0.5min | 30.12.2024 |
