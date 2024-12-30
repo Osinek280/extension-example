@@ -1,14 +1,173 @@
-File: c:\Users\biuro\Desktop\ext test\lol.js
+File: c:\Users\biuro\Desktop\ext test\tracker.ts
 Diff:
-Index: c:\Users\biuro\Desktop\ext test\lol.js
+Index: c:\Users\biuro\Desktop\ext test\tracker.ts
 ===================================================================
---- c:\Users\biuro\Desktop\ext test\lol.js
-+++ c:\Users\biuro\Desktop\ext test\lol.js
-@@ -1,4 +1,4 @@
- let tekst = "To jest\nprzykładowy\ntekst.";
- let bezNowychLinii = tekst.replace(/\n/g, "");
--// console.log(tekst)
-+console.log(tekst)
- console.log(bezNowychLinii);
+--- c:\Users\biuro\Desktop\ext test\tracker.ts
++++ c:\Users\biuro\Desktop\ext test\tracker.ts
+@@ -1,163 +0,0 @@
+-import * as vscode from 'vscode';
+-import * as jsdiff from 'diff';
+-import { pushCommit } from './githubService';
+-import { getRepoName } from './gitService';
+-import { groqMessage } from './groqService';
+-
+-export class Tracker {
+-  private config: vscode.WorkspaceConfiguration;
+-  private trackedExtensions: string[];
+-  private excludePatterns: string[];
+-  private commitFrequency: number;
+-  private fileStatuses: Array<{ path: string; saved: boolean; content: string }>;
+-  private trackingInterval: NodeJS.Timeout | null;
+-  private statusBarItem: vscode.StatusBarItem;
+-  private countdownInterval: NodeJS.Timeout | null;
+-
+-  constructor() {
+-    this.config = vscode.workspace.getConfiguration('aitrack');
+-    this.trackedExtensions = [
+-      'ts', 'js', 'py', 'java', 'c', 'cpp', 'h', 'hpp', 'css', 'scss', 'html', 'jsx', 'tsx', 'vue', 'php', 'rb', 'go', 'rs', 'swift', 'md', 'json', 'yml', 'yaml'
+-    ];
+-    this.excludePatterns = this.config.get<string[]>('exclude', []);
+-    this.commitFrequency = this.config.get<number>('commitFrequency', 30) * 60000;
+-    this.fileStatuses = [];
+-    this.countdownInterval = null;
+-    this.trackingInterval = null;
+-    this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+-    this.statusBarItem.show();
+-  }
+-
+-  public async start() {
+-    try {
+-      await this.initializeFileStatuses();
+-      vscode.window.showInformationMessage(`Start Tracking`);
+-      this.startTracking();
+-      this.listenForConfigChanges();
+-    } catch (error) {
+-      vscode.window.showErrorMessage(`Error starting tracking: ${error}`);
+-    }
+-  }
+-
+-
+-  private listenForConfigChanges() {
+-    vscode.workspace.onDidChangeConfiguration(e => {
+-      if(e.affectsConfiguration("aitrack")) {
+-        this.config = vscode.workspace.getConfiguration('aitrack');
+-        this.excludePatterns = this.config.get<string[]>('exclude', []);
+-        this.commitFrequency = this.config.get<number>('commitFrequency', 30) * 60000;
+-
+-        this.start();
+-      }
+-    });
+-  }
+-
+-  private async initializeFileStatuses() {
+-    const files = await vscode.workspace.findFiles(`**/*.{${this.trackedExtensions.join(",")}}`, `{${this.excludePatterns.join(',')}}`);
+-    this.fileStatuses = await Promise.all(files
+-      .map(async file => {
+-        const document = await vscode.workspace.openTextDocument(file);
+-        return {
+-          path: file.fsPath,
+-          saved: !document.isDirty,
+-          content: document.getText()
+-        };
+-      }));
+-  }
+-
+-  private startTracking() {
+-    this.trackingInterval = setInterval(async () => {
+-      await this.checkForChanges();
+-      this.startCountdown();
+-    }, this.commitFrequency);
+-
+-    this.startCountdown();
+-  }
+-
+-  private startCountdown() {
+-    let remainingTime = this.commitFrequency;
+-    this.updateStatusBar(remainingTime);
+-
+-    if (this.countdownInterval) {
+-      clearInterval(this.countdownInterval);
+-    }
+-
+-    this.countdownInterval = setInterval(() => {
+-      remainingTime -= 1000;
+-      this.updateStatusBar(remainingTime);
+-
+-      if (remainingTime <= 0) {
+-        clearInterval(this.countdownInterval!);
+-      }
+-    }, 1000);
+-  }
+-
+-  private updateStatusBar(remainingTime: number) {
+-    const minutes = Math.floor(remainingTime / 60000);
+-    const seconds = Math.floor((remainingTime % 60000) / 1000);
+-    this.statusBarItem.text = `$(clock) Next check in ${minutes}:${seconds.toString().padStart(2, '0')}`;
+-  }
+-
+-  private async checkForChanges() {
+-    const files = await vscode.workspace.findFiles(`**/*.{${this.trackedExtensions.join(",")}}`, `{${this.excludePatterns.join(',')}}`);
+-    const updatedFileStatuses = await Promise.all(files
+-      .map(async file => {
+-        const document = await vscode.workspace.openTextDocument(file);
+-        return {
+-          path: file.fsPath,
+-          saved: !document.isDirty,
+-          content: document.getText()
+-        };
+-      }));
+-
+-    const changes = this.getChanges(updatedFileStatuses);
+-
+-    if (changes.length > 0) {
+-      const allChanges = this.generateChangesReport(changes);
+-      console.log('All changes: ');
+-      console.log(allChanges);
+-
+-      const repoName = await getRepoName();
+-      const { message } = await groqMessage(allChanges);
+-      
+-      pushCommit(
+-        repoName || 'undefined', 
+-        new Date().toLocaleDateString(), 
+-        this.commitFrequency, 
+-        message || 'an error occurred using ai, please contact the extension owner', 
+-        allChanges
+-      );
+-
+-      vscode.window.showInformationMessage(`Changed files: ${changes.map(file => file.path).join(', ')}`);
+-    } else {
+-      vscode.window.showInformationMessage('No files were changed.');
+-    }
+-
+-    this.fileStatuses = updatedFileStatuses;
+-  }
+-
+-  private getChanges(updatedFileStatuses: Array<{ path: string; saved: boolean; content: string }>) {
+-    return updatedFileStatuses.filter(updatedFile => {
+-      const originalFile = this.fileStatuses.find(file => file.path === updatedFile.path);
+-      return originalFile && originalFile.content !== updatedFile.content;
+-    });
+-  }
+-
+-  private generateChangesReport(changes: Array<{ path: string; saved: boolean; content: string }>) {
+-    return changes.reduce((acc, file) => {
+-      const originalFile = this.fileStatuses.find(f => f.path === file.path);
+-      const diff = jsdiff.createPatch(file.path, originalFile?.content || '', file.content);
+-      return acc + `File: ${file.path}\nDiff:\n${diff}\n\n`;
+-    }, '');
+-  }
+-
+-  public dispose() {
+-    if (this.trackingInterval) {
+-      clearInterval(this.trackingInterval);
+-    }
+-    if (this.countdownInterval) {
+-      clearInterval(this.countdownInterval);
+-    }
+-    this.statusBarItem.dispose();
+-  }
+-}
+\ No newline at end of file
 
 
