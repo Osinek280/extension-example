@@ -8,7 +8,7 @@ For more information about AiTrack, visit [our GitHub repository](https://github
 
 | Repo | Commit Message | Timestamp | Date |
 |-----------|-----------|----------------|------|
-| ext-test | fix(main): refine time formatting | 0.5min | 30.12.2024 |
+| coding-tracker | fix(main): refine time formatting | 0.5min | 30.12.2024 |
 | ext test | fix(time): update time.js to display time in hh:mm:ss format | 0.5min | 30.12.2024 |
 | ext test | fixcripts: use const and template literals for logging | 0.5min | 30.12.2024 |
 | ext test | fix(components): update logging to show current date | 0.5min | 30.12.2024 |
