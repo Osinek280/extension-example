@@ -1,20 +1,11 @@
-Index: c:\Users\biuro\Desktop\ext test\kys.ts
-===================================================================
---- c:\Users\biuro\Desktop\ext test\kys.ts
-+++ c:\Users\biuro\Desktop\ext test\kys.ts
-@@ -1,1 +1,1 @@
--console.log()
-\ No newline at end of file
-+console.log(new Date())
-\ No newline at end of file
-
 Index: c:\Users\biuro\Desktop\ext test\huj.js
 ===================================================================
 --- c:\Users\biuro\Desktop\ext test\huj.js
 +++ c:\Users\biuro\Desktop\ext test\huj.js
-@@ -1,1 +1,1 @@
--console.log("bolek i lolek")
+@@ -1,1 +1,2 @@
+-console.log(new Date())
 \ No newline at end of file
-+console.log(new Date())
++const currentTime = new Date();
++console.log(`Aktualny czas: ${currentTime}`);
 \ No newline at end of file
 
