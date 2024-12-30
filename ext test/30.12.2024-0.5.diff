@@ -3,18 +3,8 @@ Index: c:\Users\biuro\Desktop\ext test\kys.ts
 --- c:\Users\biuro\Desktop\ext test\kys.ts
 +++ c:\Users\biuro\Desktop\ext test\kys.ts
 @@ -1,1 +1,1 @@
--console.log("huj")
+-console.log("huj ci w dupe")
 \ No newline at end of file
-+console.log("huj ci w dupe")
-\ No newline at end of file
-
-Index: c:\Users\biuro\Desktop\ext test\tracker.ts
-===================================================================
---- c:\Users\biuro\Desktop\ext test\tracker.ts
-+++ c:\Users\biuro\Desktop\ext test\tracker.ts
-@@ -1,1 +1,1 @@
--console.log("teść")
-\ No newline at end of file
-+console.log("huj")
++console.log("huj ci w cipe")
 \ No newline at end of file
 
